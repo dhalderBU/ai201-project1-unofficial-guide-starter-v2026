@@ -19,8 +19,8 @@ pipeline earns credit; *"80% seemed reasonable"* does not.
 
 ## 1. Retrieved chunks contain the answer
 
-Retrival success rate 80% : For at least 4 of my 5 test questions, the retrieved chunks include one that
-contains the answer and has the source file for that answer
+For at least 4 of my 5 test questions, the retrieved chunks include one that
+contains the answer.
 
 **Why this target:**
 <!-- e.g. "One of my questions is about a topic only two documents mention, so
@@ -30,7 +30,7 @@ contains the answer and has the source file for that answer
 
 ## 2. Every answer names a source
 
-Source of information quotes 100% of the response: Every answer the system produces names at least one source document.
+Every answer the system produces names at least one source document.
 
 **Why this target:**
 <!-- Why all five and not four? What about your setup makes that achievable —
@@ -53,14 +53,12 @@ in at least 4 of 5 tries.
      what happened into your run log. Swap them for your own if you'd rather —
      just keep five of them, or the "4 of 5" above has nothing to be 4 of. -->
 
-The Prompt builder in our system has specific rules :  "If the documents don't cover the question, say you don't have enough information. Do not guess". But there will be occurance that the vector dimension was not big enough and some of the projections overlapped due to lower dimension. The distance criteria should help us filter anything that is above 0.6 is what the defaults setting is
-
 
 **Why this target:**
 <!-- What did your distances look like when you set the cutoff in Milestone 4?
      Was there a clean gap, or did the two groups overlap? -->
 
-
+The Prompt builder in our system has specific rules :  "If the documents don't cover the question, say you don't have enough information. Do not guess". But there will be occurance that the vector dimension was not big enough and some of the projections overlapped due to lower dimension. The distance criteria should help us filter anything that is above 0.6 is what the defaults setting is
 
 --- 
 
