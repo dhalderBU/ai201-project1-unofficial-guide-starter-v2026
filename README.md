@@ -1,6 +1,7 @@
 # The Unofficial Guide
 
-<!-- Replace this line with your name and which corpus you picked. -->
+**Name:** Debasish Halder  
+**Corpus:** campus_life
 
 > **This file is your submission.** Fill it in as you go — most sections get
 > written during the milestone that produces them, not at the end.
@@ -22,11 +23,15 @@
 
 ## What This Does
 
-<!-- Three or four sentences. Which corpus you picked, and the kinds of
-     questions your system answers. Write it for someone who has never seen
-     this repo.
+**Corpus Suitability**
+I opted to go for campus_life.
 
-     Milestone 5. -->
+Content reflects real campus-life problems across admin, courses, dining, and housing.
+Each question typically has at most two different answers, sometimes contradicting (good vs. bad).
+Topic is clearly labeled at the top of each item.
+Moderate sentence length (a couple of lines), so only a modest context window is needed.  And I can experiment quite a bit 
+
+<!-- Update after Milestone 5 again-->
 
 ## Chunking Strategy
 
