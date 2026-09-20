@@ -76,7 +76,9 @@ The Prompt builder in our system has specific rules :  "If the documents don't c
        - "No chunk is shorter than 200 characters, since anything below that
           in my corpus turned out to be a heading with no content under it." -->
 
-
+- I will know that the chunk size is good when the retrival of the chunk gives chuns which is having meaning aond context , it returns data which is there in the source file indicated and  has low distance .
+Chunks which are not related to the question doesnt show withing acceptabelscore range or is in low score  (high is good for chunk with lower relevance)
+- The LLM is able to use the information from the chunk and create clear response
 
 **Why this target:**
 Any AI based application that we build shoiuld give helpful answers which means should be with context. If the chunks size is not good enough we may not be able have enough context captured. If the chunk size is too big we will have context dilution as context is captured through attention mechanism. So we need to have a balance and the vector dimention of the embedding model needs to be taken into consideration . If the embedding model supports larger vector(higher dimension) then we will be able to capture the context better. One more thing is we know we can typically in 5-6 lines do a relatively good job of expressing information so my guess is a target of 500-900 characters should give  us a good answer which is having proper context( considering 80-100 characters per line of test that gives us 5-9 lines of text)
@@ -94,7 +96,8 @@ Any AI based application that we build shoiuld give helpful answers which means 
      handles badly, about source attribution being correct rather than merely
      present — anything, as long as it names a number or an observable
      outcome. -->
-
+- Accuracy  of response- I would like the score to be preferably below 0.5 and as near to 0.3 as possible
+- No non relevant answer and low halucination- If there is no content for a specific question the retreival should say not found and LLM should not respond with a cooked up answer (i.e low halucination)
 
 
 **Why this target:**
