@@ -25,8 +25,8 @@ contains the answer.
 **Why this target:**
 <!-- e.g. "One of my questions is about a topic only two documents mention, so
      I expect that one to be hard." -->
-
----
+80% correctness is a resonable ask as we dont have anything between 80 and 100. Ideally  I wouuld like about 85% to 90% and I cant go for 100% as there will be few questions whose vector distance may not be within limits . The reason at least this is thawe want a grounded response based ont he documents we have chunked and vectorized and saved in the Chroma vector DB 
+---     
 
 ## 2. Every answer names a source
 
@@ -36,7 +36,9 @@ Every answer the system produces names at least one source document.
 <!-- Why all five and not four? What about your setup makes that achievable —
      or what would have to go wrong for it not to be? -->
 
----
+The Prompt builder in our system has specific rules which says "Name the document your answer came from, using the filename given in each excerpt"  and another rule "If the documents don't cover the question, say you don't have enough information. Do not guess"
+
+--- 
 
 ## 3. The relevance gate stops out-of-corpus questions
 
@@ -53,7 +55,9 @@ in at least 4 of 5 tries.
 <!-- What did your distances look like when you set the cutoff in Milestone 4?
      Was there a clean gap, or did the two groups overlap? -->
 
----
+The Prompt builder in our system has specific rules :  "If the documents don't cover the question, say you don't have enough information. Do not guess". But there will be occurance that the vector dimension was not big enough and some of the projections overlapped due to lower dimension.
+
+--- 
 
 ## 4. Something about your chunks
 
@@ -72,6 +76,7 @@ in at least 4 of 5 tries.
 
 
 **Why this target:**
+Any AI based application that we build shoiuld give helpful answers which means should be with context. If the chunks size is not good enough we may not be able have enough context captured. If the chunk size is too big we will have context dilution as context is captured through attention mechanism. So we need to have a balance and the vector dimention of the embedding model needs to be taken into consideration . If the embedding model supports larger vector(higher dimension) then we will be able to capture the context better. One more thing is we know we can typically in 5-6 lines do a relatively good job of expressing information so my guess is a target of 500-900 characters should give  us a good answer which is having proper context( considering 80-100 characters per line of test that gives us 5-9 lines of text)
 
 
 
@@ -91,6 +96,7 @@ in at least 4 of 5 tries.
 
 **Why this target:**
 
+I care about accuracy of information and that would mean relevant, having context, not hallunicanated  and within a reasonable amount of wait time.
 
 
 ---
