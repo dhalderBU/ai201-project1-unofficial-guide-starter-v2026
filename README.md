@@ -186,6 +186,24 @@ While Building custom chunker I used claude to give me the python code based on 
 
 I implemented the chunker which will work for all the types of data / corpus we were given. As a stretch type laterty I could add metadata based filtering and adding seprate vector space for documents which will help in city_guides kind of corpus
 
+
+Here is my interaction with Claude on chunking strategy for city_guide and I was having to and fro:
+
+**My Question:**
+
+Can we have a vector which is specifc to a city which only has background and when we findit first finds the city name and then find the info vector and then section is a second vecotrr thereby we have only one additional vecrofor info vector which but stored in a seprate vector space
+
+**Claude Response:**
+
+
+Yes, this is a sensible design — you're describing a narrower version of two-level retrieval that only splits out the intro/background, not the whole doc. Let me think through it carefully because it's genuinely different from what I described before, and it might actually be worth building for your setup where the fully general version wasn't.
+
+What you're proposing, in my words
+
+Two vector spaces (Chroma collections):
+
+Intro collection. One vector per doc, embedded from the doc's intro paragraph plus its title. For Marchwood, that's # Marchwood\n\nMarchwood is the regional hub — 180,000 people.... Around 14 vectors for city_guides.
+Sections collection. One vector per section chunk, the way your _strategy_sectioned currently produces them minus the intro chunk. For Marchwood, that's 7 vectors (one per ## section).
 ---
 
 # Week 2

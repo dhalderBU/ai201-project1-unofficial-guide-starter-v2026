@@ -30,10 +30,86 @@ CORPUS = os.getenv("AI201_CORPUS", "campus_life")
 CHUNK_SIZE = 800        # characters per chunk
 CHUNK_OVERLAP = 120     # characters shared between neighbouring chunks
 
+# *******Deb***
+
+# =====================================================================
+# Chunker configuration
+# =====================================================================
+
+# ---- Chunker switch --------------------------------------------------
+# "original"   -> chunker.py::fallback_split
+#                 (starter's fixed-size character windows, ignores corpus)
+# "experiment" -> chunker.py::split_documents
+#                 (structure-aware, per-corpus strategy and sizing)
+# Milestone 3 asks you to compare the two. Flip this to A/B without
+# editing any code, then re-run `python app.py --corpus X index` and
+# `python app.py --corpus X chunks -n 10`.
+# CHUNKER_MODE = "original"     # "original" | "experiment"
+#CHUNKER_MODE = "experiment"   # "original" | "experiment"
+
+
+# ---- Global chunk-size defaults --------------------------------------
+# Used by:
+#   - "original" mode (fallback_split reads these directly), and
+#   - "experiment" mode as the FALLBACK when a corpus has no per-corpus
+#     override in CORPUS_SETTINGS below.
+#
+
+# ---- Experiment-mode routing (ignored in "original" mode) ------------
+# Which chunking strategy to use for each corpus. The name on the right
+# must match a strategy registered in chunker.py's _STRATEGIES dict.
+CORPUS_STRATEGIES = {
+    "campus_life":    "prose_with_headings",
+    "advice_threads": "threaded",
+    "city_guides":    "sectioned",       # <- only this one runs the sectioned strategy soas city info gets added to the chunk
+    "practice":       "prose_with_headings",
+}
+
+# Fallback strategy for a corpus name not listed in CORPUS_STRATEGIES
+# (e.g. a corpus you bring your own under corpora/your_name/).
+DEFAULT_STRATEGY = "prose_with_headings"
+
+
+# ---- Experiment-mode per-corpus size overrides -----------------------
+# Any key omitted for a corpus falls back to the global CHUNK_SIZE /
+# CHUNK_OVERLAP above. Leave this dict empty ({}) to use the globals
+# for every corpus.
+#
+# Reasoning per corpus:
+#   campus_life    - README says ~317 chars/doc. A 900 cap is wasteful;
+#                    500 is enough for the occasional longer doc and
+#                    keeps short-doc chunks tight.
+#   advice_threads - Very uneven reply length; keep 900 so a long reply
+#                    plus its topic prefix stays in one chunk when it
+#                    can. 10% overlap is enough because replies are
+#                    semantically independent (different authors).
+#   city_guides    - ~2,068 chars/doc, sectioned. Full 900 cap under the
+#                    model limit, and ~15% overlap because long sections
+#                    routinely split into 3+ chunks that need context
+#                    bleeding across the cuts.
+#   practice       - Omitted -> falls back to globals. Instructor corpus,
+#                    no tuning needed.
+CORPUS_SETTINGS = {
+    "campus_life":    {"chunk_size": 500, "overlap":  50},
+    "advice_threads": {"chunk_size": 500, "overlap":  90},
+    "city_guides":    {"chunk_size": 900, "overlap":  90},    #overlap10% as we are breakin on paragraph 
+}
+
+
+# *******Deb***
+
+# ─── Chunking (Milestone 3) ──────────────────────────────────────────────────
+# These are deliberately plain, generic numbers. Milestone 3 is where you
+# replace them with numbers that fit the documents you actually read.
+
+CHUNK_SIZE = 1200        # characters per chunk
+CHUNK_OVERLAP = 120     # characters shared between neighbouring chunks
+
+
 
 # ─── Retrieval (Milestone 4) ─────────────────────────────────────────────────
 
-TOP_K = 5               # how many chunks to pull back per question
+TOP_K = 3               # how many chunks to pull back per question
 
 # The relevance gate. If the best chunk is further away than this, the system
 # refuses to answer instead of handing the model thin material.
@@ -43,7 +119,7 @@ TOP_K = 5               # how many chunks to pull back per question
 # 0.6 is a reasonable starting point, not a right answer. Milestone 4 has you
 # measure your own two groups of distances and put the cutoff in the gap.
 # Most corpora land somewhere between 0.45 and 0.75.
-THRESHOLD = 0.6
+THRESHOLD = 0.5
 
 
 # ─── Models ──────────────────────────────────────────────────────────────────
