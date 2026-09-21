@@ -202,7 +202,8 @@ Can we have a vector which is specifc to a city which only has background and wh
 - Two vector spaces (Chroma collections):
 
 - Intro collection. One vector per doc, embedded from the doc's intro paragraph plus its title. For Marchwood, that's # Marchwood\n\nMarchwood is the regional hub — 180,000 people.... Around 14 vectors for city_guides.
-Sections collection. One vector per section chunk, the way your _strategy_sectioned currently produces them minus the intro chunk. For Marchwood, that's 7 vectors (one per ## section).
+Sections collection. One vector per section chunk, the way your _strategy_sectioned currently produces them minus the intro chunk. For Marchwood, that's 7 vectors (one per section).
+
 ---
 
 # Week 2
