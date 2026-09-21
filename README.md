@@ -195,14 +195,13 @@ Can we have a vector which is specifc to a city which only has background and wh
 
 **Claude Response:**
 
+- Yes, this is a sensible design — you're describing a narrower version of two-level retrieval that only splits out the intro/background, not the whole doc. Let me think through it carefully because it's genuinely different from what I described before, and it might actually be worth building for your setup where the fully general version wasn't.
 
-Yes, this is a sensible design — you're describing a narrower version of two-level retrieval that only splits out the intro/background, not the whole doc. Let me think through it carefully because it's genuinely different from what I described before, and it might actually be worth building for your setup where the fully general version wasn't.
+- What you're proposing, in my words
 
-What you're proposing, in my words
+- Two vector spaces (Chroma collections):
 
-Two vector spaces (Chroma collections):
-
-Intro collection. One vector per doc, embedded from the doc's intro paragraph plus its title. For Marchwood, that's # Marchwood\n\nMarchwood is the regional hub — 180,000 people.... Around 14 vectors for city_guides.
+- Intro collection. One vector per doc, embedded from the doc's intro paragraph plus its title. For Marchwood, that's # Marchwood\n\nMarchwood is the regional hub — 180,000 people.... Around 14 vectors for city_guides.
 Sections collection. One vector per section chunk, the way your _strategy_sectioned currently produces them minus the intro chunk. For Marchwood, that's 7 vectors (one per ## section).
 ---
 
